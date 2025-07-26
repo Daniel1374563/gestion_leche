@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Gestión de Clientes{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <nav style="background:#2980b9; padding:16px 0; margin-bottom:32px;">
+        <div style="max-width:900px; margin:0 auto; display:flex; gap:32px; align-items:center;">
+            <a href="{% url 'clientes:home' %}" style="color:#fff; font-weight:600; text-decoration:none; font-size:20px;">Inicio</a>
+            <a href="{% url 'clientes:form' %}" style="color:#fff; font-weight:600; text-decoration:none; font-size:20px;">Crear Cliente</a>
+            <a href="{% url 'clientes:historial' %}" style="color:#fff; font-weight:600; text-decoration:none; font-size:20px;">Historial</a>
+        </div>
+    </nav>
+    <main style="max-width:900px; margin:0 auto;">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

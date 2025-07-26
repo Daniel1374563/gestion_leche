@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+{% block title %}Clientes para {{ dia }}{% endblock %}
+{% block content %}
+    <div class="form-container" style="margin-top:40px;">
+        <h1>Clientes para {{ dia }}</h1>
+        {% if clientes %}
+            <ul style="list-style:none; padding:0;">
+                {% for cliente in clientes %}
+                    <li style="padding:12px 0; border-bottom:1px solid #eaeaea;">
+                        <strong>{{ cliente.nombre }}</strong><br>
+                        Dirección: {{ cliente.direccion }}<br>
+                        Teléfono: {{ cliente.numero_de_telefono }}<br>
+                        Cantidad de litros: {{ cliente.cantidad_de_litros }}<br>
+                        Importe a pagar: ${{ cliente.importe_a_pagar }}<br>
+                        Estado: {% if cliente.done %}<span style="color:green;">Entregado</span>{% else %}<span style="color:red;">Pendiente</span>{% endif %}
+                        <form method="post" style="display:inline; margin-left:16px;">
+                            {% csrf_token %}
+                            <input type="hidden" name="cliente_id" value="{{ cliente.id }}">
+                            <input type="hidden" name="accion" value="cambiar_estado">
+                            <button type="submit" style="background:#2980b9; color:#fff; border:none; padding:4px 12px; border-radius:6px; cursor:pointer; font-size:14px;">
+                                Cambiar estado
+                            </button>
+                        </form>
+                        <a href="{% url 'clientes:form' %}?editar={{ cliente.id }}" style="background:#f39c12; color:#fff; border:none; padding:4px 12px; border-radius:6px; cursor:pointer; font-size:14px; text-decoration:none; margin-left:8px;">Editar</a>
+                        <form method="post" style="display:inline; margin-left:8px;">
+                            {% csrf_token %}
+                            <input type="hidden" name="cliente_id" value="{{ cliente.id }}">
+                            <input type="hidden" name="accion" value="eliminar">
+                            <button type="submit" onclick="return confirm('¿Seguro que deseas eliminar este cliente?');" style="background:#e74c3c; color:#fff; border:none; padding:4px 12px; border-radius:6px; cursor:pointer; font-size:14px;">Eliminar</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p style="text-align:center; color:#888;">No hay clientes para este día.</p>
+        {% endif %}
+        <div style="text-align:center; margin-top:20px;">
+            <a href="{% url 'clientes:home' %}" style="color:#2980b9; text-decoration:underline; font-weight:600;">Volver a los días</a>
+        </div>
+    </div>
+{% endblock %}

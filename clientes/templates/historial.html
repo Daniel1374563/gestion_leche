@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% block title %}Historial de Entregados{% endblock %}
+{% block content %}
+    <div class="form-container" style="margin-top:40px;">
+        <h1>Historial de Clientes Entregados</h1>
+        {% if clientes %}
+            <div style="margin-bottom:24px; text-align:center;">
+                <span style="font-size:20px; color:#27ae60; font-weight:600;">Dinero generado: ${{ total_importe }}</span>
+            </div>
+            <ul style="list-style:none; padding:0;">
+                {% for cliente in clientes %}
+                    <li style="padding:12px 0; border-bottom:1px solid #eaeaea;">
+                        <strong>{{ cliente.nombre }}</strong><br>
+                        Día de entrega: {{ cliente.fecha_de_entrega }}<br>
+                        Dirección: {{ cliente.direccion }}<br>
+                        Teléfono: {{ cliente.numero_de_telefono }}<br>
+                        Cantidad de litros: {{ cliente.cantidad_de_litros }}<br>
+                        Importe a pagar: ${{ cliente.importe_a_pagar }}<br>
+                        Estado: <span style="color:green;">Entregado</span>
+                        <form method="post" style="display:inline; margin-left:16px;">
+                            {% csrf_token %}
+                            <input type="hidden" name="cliente_id" value="{{ cliente.id }}">
+                            <input type="hidden" name="accion" value="eliminar">
+                            <button type="submit" onclick="return confirm('¿Seguro que deseas eliminar este cliente del historial?');" style="background:#e74c3c; color:#fff; border:none; padding:4px 12px; border-radius:6px; cursor:pointer; font-size:14px;">Eliminar</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p style="text-align:center; color:#888;">No hay clientes entregados aún.</p>
+        {% endif %}
+    </div>
+{% endblock %}

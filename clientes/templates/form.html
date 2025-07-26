@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+{% block title %}Crear Cliente{% endblock %}
+{% block content %}
+    <h1 style="text-align:center; color:#2c3e50;">{% if editar %}Editar Cliente{% else %}Crear Cliente{% endif %}</h1>
+    <div class="form-container">
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div>
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small>{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <span class="error">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <button type="submit">{% if editar %}Actualizar{% else %}Guardar{% endif %}</button>
+        </form>
+    </div>
+{% endblock %}
