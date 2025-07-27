@@ -12,6 +12,9 @@
             <a href="{% url 'clientes:home' %}" style="color:#fff; font-weight:600; text-decoration:none; font-size:20px;">Inicio</a>
             <a href="{% url 'clientes:form' %}" style="color:#fff; font-weight:600; text-decoration:none; font-size:20px;">Crear Cliente</a>
             <a href="{% url 'clientes:historial' %}" style="color:#fff; font-weight:600; text-decoration:none; font-size:20px;">Historial</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'clientes:logout' %}" style="margin-left:auto; background:#fff; color:#2980b9; padding:7px 18px; border-radius:6px; text-decoration:none; font-weight:600;">Salir</a>
+            {% endif %}
         </div>
     </nav>
     <main style="max-width:900px; margin:0 auto;">

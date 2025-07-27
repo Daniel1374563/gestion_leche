@@ -24,13 +24,20 @@ import os
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-qo07u4nx5wi9o#0@5c*#htp4k&g(70z3-$0c9sp^*c2fn&t229')
 # In production, set the DJANGO_SECRET_KEY environment variable and remove the fallback.
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
 
-ALLOWED_HOSTS = ['pura-vaca.pythonanywhere.com']
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'clientes' / 'static',
+]
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -86,20 +93,7 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
+AUTH_PASSWORD_VALIDATORS = []
 
 
 # Internationalization
