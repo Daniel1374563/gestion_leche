@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Usuario</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Crear Usuario</h1>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div>
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% for error in field.errors %}
+                        <span class="error">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <button type="submit">Registrarse</button>
+        </form>
+        <div style="text-align:center; margin-top:18px;">
+            <a href="{% url 'clientes:login' %}" style="background:#2980b9; color:#fff; padding:7px 18px; border-radius:6px; text-decoration:none; font-weight:600;">¿Ya tienes cuenta? Inicia sesión</a>
+        </div>
+    </div>
+</body>
+</html>
+<h1>Sigup</h1>

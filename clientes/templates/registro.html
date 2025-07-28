@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+{% block title %}Registro de Usuario{% endblock %}
+{% block content %}
+<div class="form-container">
+    <h1>Crear una cuenta</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Registrarse</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+{% block title %}Iniciar Sesión{% endblock %}
+{% block content %}
+<div class="form-container">
+    <h1>Iniciar Sesión</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Entrar</button>
+        <div style="text-align:center; margin-top:18px;">
+            <a href="{% url 'clientes:signup' %}" style="background:#2980b9; color:#fff; padding:7px 18px; border-radius:6px; text-decoration:none; font-weight:600;">¿No tienes cuenta? Regístrate</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
